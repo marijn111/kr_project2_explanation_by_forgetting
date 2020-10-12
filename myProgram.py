@@ -7,7 +7,7 @@ inputOntology = "datasets/pizza_super_simple.owl"
 
 # Choose the set of subclass for which you want to find an explanation.
 # this file can be generated using the second command (saveAllSubClasses)
-inputSubclassStatements = "datasets/subClasses.nt"
+inputSubclassStatements = "subclasstest.nt"
 
 # Choose the ontology to which you want to apply forgetting. This can be the inputOntology, but in practise
 # should be a smaller ontology, e.g. created as a justification for a subsumption
@@ -31,20 +31,20 @@ signature = "datasets/signature.txt"
 # 2. SAVE ALL SUBCLASSES (inputOntology):
 # save all subClass statements (explicit and inferred) in the inputOntology to file datasets/subClasses.nt
 # --> uncomment the following line to run this function
-#os.system('java -jar kr_functions.jar ' + 'saveAllSubClasses' + " " + inputOntology)
+# os.system('java -jar kr_functions.jar ' + 'saveAllSubClasses' + " " + inputOntology)
 
 # 3. PRINT ALL EXPLANATIONS (inputOntology, inputSubclassStatements):
 # print explanations for each subClass statement in the inputSubclassStatements
 # --> uncomment the following line to run this function
-#os.system('java -jar kr_functions.jar ' + 'printAllExplanations' + " " + inputOntology + " " + inputSubclassStatements)
+# os.system('java -jar kr_functions.jar ' + 'printAllExplanations' + " " + inputOntology + " " + inputSubclassStatements)
 
 # 4. SAVE ALL EXPLANATIONS (inputOntology, inputSubclassStatements):
 # save explanations for each subClass statement in the inputSubclassStatements to file datasets/exp-#.owl
 # --> uncomment the following line to run this function
-#os.system('java -jar kr_functions.jar ' + 'saveAllExplanations' + " " + inputOntology + " " + inputSubclassStatements)
+# os.system('java -jar kr_functions.jar ' + 'saveAllExplanations' + " " + inputOntology + " " + inputSubclassStatements)
 
 
 # For running LETHE forget command:
 # --> uncomment the following line to run this function
-os.system('java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + forgetOntology + ' --method ' + method  + ' --signature ' + signature)
+os.system('java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + forgetOntology + ' --method ' + method + ' --signature ' + signature)
 
