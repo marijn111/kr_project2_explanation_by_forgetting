@@ -115,38 +115,3 @@ class OntologyProcessing:
 
         print('[INFO] Amount of restrictions: {}'.format(self.amount_of_restrictions))
         print('[INFO] Amount of forgotten items: {}'.format(self.amount_of_forgotten_items))
-
-
-
-
-
-
-
-
-#
-# forgetOntology = 'datasets/pizza_super_simple.owl'
-# signature = 'datasets/signature.txt'
-# method = '2'
-# satisfiable = 1
-#
-# loop_count = 0
-#
-# amount_of_restrictions = 0
-# amount_of_forgotten_items = 0
-# classes = []
-#
-#
-# added_axioms = 1
-#
-# ontology = open('datasets/pizza_super_simple.owl')
-#
-# # Gather the amount of restrictions
-# for line in ontology:
-#     if '<owl:Restriction>' in line:
-#         amount_of_restrictions += 1
-
-
-
-
-
-
