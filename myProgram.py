@@ -31,7 +31,7 @@ signature = "datasets/signature.txt"
 # 2. SAVE ALL SUBCLASSES (inputOntology):
 # save all subClass statements (explicit and inferred) in the inputOntology to file datasets/subClasses.nt
 # --> uncomment the following line to run this function
-# os.system('java -jar kr_functions.jar ' + 'saveAllSubClasses' + " " + inputOntology)
+os.system('java -jar kr_functions.jar ' + 'saveAllSubClasses' + " " + inputOntology)
 
 # 3. PRINT ALL EXPLANATIONS (inputOntology, inputSubclassStatements):
 # print explanations for each subClass statement in the inputSubclassStatements
@@ -46,5 +46,5 @@ signature = "datasets/signature.txt"
 
 # For running LETHE forget command:
 # --> uncomment the following line to run this function
-os.system('java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + forgetOntology + ' --method ' + method + ' --signature ' + signature)
+# os.system('java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + forgetOntology + ' --method ' + method + ' --signature ' + signature)
 
