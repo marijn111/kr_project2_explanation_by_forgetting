@@ -1,0 +1,2645 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:crm="http://trajano.us.es/~isabel/EHR/Common_RM.owl#"
+    xmlns:srm="http://trajano.us.es/~isabel/EHR/Support_RM.owl#"
+    xmlns="http://trajano.us.es/~isabel/EHR/Data_Types_RM.owl#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xml:base="http://trajano.us.es/~isabel/EHR/Data_Types_RM.owl">
+  <owl:Ontology rdf:about="">
+    <rdfs:comment>The openEHR Data Types Reference Model
+Based on the Revision 1.7.3
+Written in OWL by Isabel Román
+November 2003</rdfs:comment>
+    <owl:imports rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl"/>
+    <owl:imports rdf:resource="http://protege.stanford.edu/plugins/owl/protege"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="TERM_MAPPING">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#match"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">TERMINO MAPEADO</rdfs:label>
+    <srm:ISO18308>STR 4.5</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#purpose"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">TERM MAPPING</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#target"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Use>Used for adding classification terms, or mapping into equivalents in other terminologies</srm:Use>
+    <srm:Purpose>Represents a coded term mapped to a DV_TEXT. and the relative match of the target term with respect to the maped item.</srm:Purpose>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_STATE">
+    <srm:CEN>The component Annotation Life Cycle was intended to permit architectural components to include a reference to this aspect of state.</srm:CEN>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DATA_VALUE"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">ESTADO</rdfs:label>
+    <rdfs:label xml:lang="en">STATE</rdfs:label>
+    <srm:Synapses>The element class includes an attribute LifeCycle to indicate the lifecycle of an instruction or action, with permitted values taken from the ENV13606-2 Domain Termlist Component Annotation of the same name</srm:Synapses>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#is_terminal"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>For representing state values which obey a defined state machine, such as a variable representing the states of an instruction or care process</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#DV_CODED_TEXT"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Use>Is expressed as a string but its values are driven by archetype-defined state machines. This provides a powerful way of capturing stateful complex processes in simple data</srm:Use>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_QUANTITY_RATIO">
+    <rdfs:label xml:lang="es">RAZON DE CANTIDADES</rdfs:label>
+    <srm:Use>Used for recording specified administration dosages (e.g. 5mg/100ml),
+drug amounts based on body weight (e.g. 1 tabledt/10kg),
+and titers (e.g. 1:128)
+Note that the units representation in sigle QUANTITYs caters for any ratio
+in which the units are expressible in unitary form.
+So a QUANTITY_RATIO of 2g/250ml could be expressed as a 
+QUANTITY of 8g/l</srm:Use>
+    <srm:OMGHDTF>COAS::Ratio</srm:OMGHDTF>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#denominator"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:ISO18308>STR 3.6</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DATA_VALUE"/>
+    </rdfs:subClassOf>
+    <srm:MisUse>Should not be used to represent thigs like blood pressure
+which are often written using a '/' character, giving the misleading
+impression that the item is a ratio, when in fact it is a structured value.</srm:MisUse>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#numerator"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">QUANTITY RATIO</rdfs:label>
+    <srm:HL7>Ratio (RTO)</srm:HL7>
+    <srm:Purpose>Models a ratio of quantities</srm:Purpose>
+    <srm:Synapses>Numeric</srm:Synapses>
+    <srm:GEHR>G1_QUANTITY_RATIO</srm:GEHR>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_DURATION">
+    <srm:GEHR>G1_DATE_TIME_DURATION</srm:GEHR>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#magnitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Use>Used ofr recording the duration of something in the real world, particularly
+when there is a need:
+to represent the duration in customary format (days, hours, minutes...)
+if it will be used in computational operations with date/time quantities</srm:Use>
+    <rdfs:label xml:lang="en">DURATION</rdfs:label>
+    <srm:ISO18308>STR 3.10</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#sign"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_CUSTOMARY_QUANTITY"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#minutes"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>Represents a period of time with respect to a notional point in time, 
+which is not specified. A sign my be used to indicate the duration is
+'backwards' in time rather than forwards</srm:Purpose>
+    <srm:MisUse>Durations cannot be used to represent points in time, or intervals of time</srm:MisUse>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_DURATION"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#diff_type"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#hours"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:CEN>Time Interval or Date Range or text description</srm:CEN>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#fractional_second"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#days"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">DURACION</rdfs:label>
+    <srm:HL7>IVL&lt;TS></srm:HL7>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#seconds"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="CODE_PHRASE">
+    <srm:ISO18308>STR 4.2</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#terminology_id"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>A fully coordinated term from a terminology service</srm:Purpose>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_PARAGRAPH">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DATA_VALUE"/>
+    </rdfs:subClassOf>
+    <srm:ISO18308>STR 2.6</srm:ISO18308>
+    <srm:GEHR>G1_PARAGRAPH</srm:GEHR>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#items"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">PARRAFO</rdfs:label>
+    <rdfs:label xml:lang="en">PARAGRAPH</rdfs:label>
+    <srm:Use>is the standrad way for constructing longer text items in summaries, reports and so on</srm:Use>
+    <srm:Purpose>A logical composite text value consisting of a series of DV_TEXTs, i.e. plain text potentially with simple formatting, to form a larger tract of prose, which may be interpreted for display purposes as a pargraph.</srm:Purpose>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_CUSTOMARY_QUANTITY">
+    <protege:abstract>true</protege:abstract>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_MEASURABLE"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">CUSTOMARY QUANTITY</rdfs:label>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_WORLD_TIME"/>
+          <owl:Class rdf:about="#DV_DATE"/>
+          <owl:Class rdf:about="#DV_DURATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <srm:Purpose>Abstract parent class of quantity types which are expressed in a form other than the estandrad scientific</srm:Purpose>
+    <rdfs:label xml:lang="es">CANTIDAD PERSONALIZADA</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_PARSABLE">
+    <rdfs:label xml:lang="en">PARSABLE</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_ENCAPSULATED"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">MANEJABLE</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#formalism"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Use>Used ofr representing values which are formal textural representations (e.g. guidelines)</srm:Use>
+    <srm:Purpose>Encapsulated data expressed as a parsable STRING. The internal 
+model of the data item is not described in the openEHR model in 
+common with other encapsulated types, but in this case, the form 
+of the data is assumed to be plaintext, rather than compressed or 
+other types or large binary data</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#STRING"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="LIST_REFERENCE_RANGE">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#REFERENCE_RANGE_T"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#item"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#LIST_T"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_TEXT">
+    <rdfs:label xml:lang="en">TEXT</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#language"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#CODE_PHRASE"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DATA_VALUE"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hyperlink"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>A plain text item, which may contain any amount of legal characters arranged as e.g. words, sentences etc. Any DV_TEXT may be coded by adding mappings to it</srm:Purpose>
+    <srm:HL7>Roughly equivalent to CWE (coded with extensions)-e.e. tesxt value which may optionally be coded.</srm:HL7>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#language"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Synapses>the Text data value class can contain either plain text or a term taken from a terminology system</srm:Synapses>
+    <rdfs:label xml:lang="es">TEXTO</rdfs:label>
+    <srm:ISO18308>STR 2.6, 2.9</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#mappings"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#formatting"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#charset"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Use>Fragments of text, whether coded or not are used on their own as values, or to make up larger gtracts of text which may be marked up in some way, eventually going to make up paragraphs.</srm:Use>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_CODED_TEXT">
+    <srm:HL7>CD,CV,CS</srm:HL7>
+    <srm:Synapses>Text</srm:Synapses>
+    <srm:CEN>Text</srm:CEN>
+    <srm:ISO18308>STR 4.1,4.2,4.3</srm:ISO18308>
+    <rdfs:subClassOf rdf:resource="#DV_TEXT"/>
+    <rdfs:label xml:lang="en">CODED TEXT</rdfs:label>
+    <srm:GEHR>G1_TERM_TEXT</srm:GEHR>
+    <srm:OMGHDTF>COAS::CodedElement,, LooselyCodedElement</srm:OMGHDTF>
+    <srm:Purpose>A text item whose value must be a rubric drawn from a controlled terminology, the key of which is the definition attribute</srm:Purpose>
+    <rdfs:label xml:lang="es">TEXTO CODIFICADO</rdfs:label>
+    <srm:Use>Can be used in place of DV_TEXT, effectively allowing the type DV_TEXT to mean a text item, which may optionally be coded.</srm:Use>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#defining_code"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DATA_VALUE">
+    <srm:ISO18308>STR 3.1-3.13</srm:ISO18308>
+    <rdfs:label xml:lang="es">VALOR DE DATO</rdfs:label>
+    <rdfs:label xml:lang="en">DATA_VALUE</rdfs:label>
+    <srm:Purpose>Serves as a common ancestor of all data value types in openEHR models</srm:Purpose>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_ORDERED"/>
+          <owl:Class rdf:about="#DV_INTERVAL_T"/>
+          <owl:Class rdf:about="#DV_BOOLEAN"/>
+          <owl:Class rdf:about="#DV_ENCAPSULATED"/>
+          <owl:Class rdf:about="#DV_TEXT"/>
+          <owl:Class rdf:about="#DV_URI"/>
+          <owl:Class rdf:about="#DV_TIME_SPECIFICATION"/>
+          <owl:Class rdf:about="#DV_PHYSICAL_DATA"/>
+          <owl:Class rdf:about="#DV_STATE"/>
+          <owl:Class rdf:about="#DV_PARAGRAPH"/>
+          <owl:Class rdf:about="#DV_QUANTITY_RATIO"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <srm:HL7>DataValue</srm:HL7>
+    <protege:abstract>true</protege:abstract>
+    <srm:CEN>The Data_Item class in CEN is a mixture of DATA_VALUE and ELEMENT in openEHR</srm:CEN>
+    <srm:OMGHDTF>COAS::ObservationValue</srm:OMGHDTF>
+  </owl:Class>
+  <owl:Class rdf:ID="COORDINATED_TERM">
+    <rdfs:label xml:lang="es">TERMINO COORDINADO</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#code_string"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#terminology_id"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">COORDINATED TERM</rdfs:label>
+    <srm:ISO18308>STR 4.2</srm:ISO18308>
+    <srm:Purpose>A fully coordinated term from a terminology service</srm:Purpose>
+  </owl:Class>
+  <owl:Class rdf:ID="SET_DV_TEXT">
+    <rdfs:subClassOf rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#SET_T"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#item"/>
+        <owl:allValuesFrom rdf:resource="#DV_TEXT"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_PARTIAL_DATE">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_DATE"/>
+    </rdfs:subClassOf>
+    <srm:ISO18308>STR 3.8</srm:ISO18308>
+    <srm:Use>Used for approximate birth dates, dates of death, etc...</srm:Use>
+    <srm:Purpose>Represents a partially known date. All partial dates have an unknown day,
+by definition, else they would be represented as normal dates. The mont_known
+flag indicates whether the month is also unknown</srm:Purpose>
+    <srm:Synapses>DateTime.FromDate</srm:Synapses>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#month_known"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">FECHA PARCIAL</rdfs:label>
+    <rdfs:label xml:lang="en">PARTIAL DATE</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_PHYSICAL_DATA">
+    <rdfs:subClassOf rdf:resource="#DATA_VALUE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_TIME_SPECIFICATION">
+    <rdfs:label xml:lang="en">TIME SPECIFICATION</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#DATA_VALUE"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_PARSABLE"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>An abstract class of which all timing specifications are
+specialisations. Specifies points in time, possibly linked to the calendar,
+or a real world repeating event, suc as "breakfast"</srm:Purpose>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_PERIODIC_TIME_SPECIFICATION"/>
+          <owl:Class rdf:about="#DV_GENERAL_TIME_SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <srm:ISO18308>STR 3.9</srm:ISO18308>
+    <rdfs:label xml:lang="es">ESPECIFICACION DE HORA</rdfs:label>
+    <protege:abstract>true</protege:abstract>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_QUANTIFIED">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#accuracy_is_percent"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>Abstract class defining the concept  of true quantified
+values, e.e. values which are not only ordered, but whose 
+magnitude is meaningful as well. The defining characteristic of the
+type is the attribute property - what is being quantified, and that the 
+difference operation is defined.</srm:Purpose>
+    <srm:CEN>unit exists as ann attribute of the measurement data value class, but there is no representation of accuracy</srm:CEN>
+    <srm:Synapses>Attributes in the Quantity class for unit and accuracy</srm:Synapses>
+    <rdfs:label xml:lang="es">CUANTIFICADO</rdfs:label>
+    <srm:HL7>QTY</srm:HL7>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#accuracy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">QUANTIFIED</rdfs:label>
+    <srm:OMGHDTF>COAS::Measurement</srm:OMGHDTF>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#diff_type"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DV_QUANTIFIED"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_CUSTOMARY_QUANTITY"/>
+          <owl:Class rdf:about="#DV_QUANTITY"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <protege:abstract>true</protege:abstract>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_ORDERED"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_EHR_URI">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_URI"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#target_is_entry"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#target_is_ehr"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#target_is_composition"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#entry_id"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#composition_id"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#target_is_transaction"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">EHR_URI</rdfs:label>
+    <rdfs:label xml:lang="en">EHR_URI</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#ehr_id"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#organiser_id"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_DATE">
+    <rdfs:label xml:lang="es">FECHA</rdfs:label>
+    <srm:CEN>TOCD choice Quantifiable Observation Data Item</srm:CEN>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#year"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:HL7>TS</srm:HL7>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_DURATION"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#diff_type"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:GEHR>G1_DATE</srm:GEHR>
+    <srm:Purpose>Represents an absolute point in time, as measured on the Gregorian
+calendar, and specified only to the day</srm:Purpose>
+    <rdfs:subClassOf rdf:resource="#DV_CUSTOMARY_QUANTITY"/>
+    <srm:Synapses>DTValue attribute of DateTime class</srm:Synapses>
+    <srm:Use>Used ofr recording dates in real world time</srm:Use>
+    <srm:ISO18308>STR 3.7</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#month"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#magnitude"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#day"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">DATE</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_INTERVAL_DV_DATE">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_DATE"/>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#upper"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">INTERVAL DATE</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_INTERVAL_T"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">INTERVALO DE FECHA</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_DATE"/>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#lower"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_INTERVAL_DV_DATE_TIME">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#lower"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">INTERVALO DE FECHA Y HORA</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_INTERVAL_T"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#upper"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">INTERVAL DATE TIME</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_GENERAL_TIME_SPECIFICATION">
+    <rdfs:subClassOf rdf:resource="#DV_TIME_SPECIFICATION"/>
+    <rdfs:label xml:lang="es">ESPECIFICACION GENERAL DE TIEMPO</rdfs:label>
+    <rdfs:label xml:lang="en">GENERAL TIME SPECIFICATION</rdfs:label>
+    <srm:Purpose>Specifies points in time in a general syntax. Based on the HL7v3 
+GTS data type</srm:Purpose>
+    <srm:HL7>GTS</srm:HL7>
+    <srm:CEN>The Duration data value class provides for the specification of time intervals, and also for a simple string description of the priodicity</srm:CEN>
+    <srm:ISO18308>STR 3.9</srm:ISO18308>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_PARTIAL_TIME">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_TIME"/>
+    </rdfs:subClassOf>
+    <srm:Purpose>Represents a partially known time. All partial time have an unknown second, 
+by definition, else they would be reprsented as normal times. The minute_known
+flag indictes whether the minute is also unknown.</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#minute_known"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">PARTIAL TIME</rdfs:label>
+    <rdfs:label xml:lang="es">HORA PARCIAL</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_MEASURABLE">
+    <srm:HL7>QTY</srm:HL7>
+    <rdfs:subClassOf rdf:resource="#DV_QUANTIFIED"/>
+    <srm:Synapses>Attributes in the Quantity class for unit and accuracy</srm:Synapses>
+    <srm:OMGHDTF>COAS::Measurements</srm:OMGHDTF>
+    <srm:Purpose>Abcstract class defining the concept of true quantified values. 
+Values which are not only ordered, but whose magnitude is 
+meaningful as well. Units were inspired by the Unified Code for 
+Units of Measure</srm:Purpose>
+    <srm:CEN>unit</srm:CEN>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#units"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_ENCAPSULATED">
+    <srm:Purpose>Abstract class defining the common meta-data of all types 
+of encapsulated data</srm:Purpose>
+    <rdfs:label xml:lang="es">ENCAPSULADOS</rdfs:label>
+    <srm:HL7>Encapsulated_data (ED)</srm:HL7>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#charset"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#size"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:CEN>TBD</srm:CEN>
+    <protege:abstract>true</protege:abstract>
+    <rdfs:subClassOf rdf:resource="#DATA_VALUE"/>
+    <srm:ISO18308>STR 2.6</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#language"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_MULTIMEDIA"/>
+          <owl:Class rdf:about="#DV_PARSABLE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <srm:OMGHDTF>COAS::Multimedia</srm:OMGHDTF>
+    <rdfs:label xml:lang="en">ENCAPSULATED</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_URI">
+    <srm:Use>Enables external resources to be referenced from within the 
+content of the EHR. A number of functions return the logical
+subparts of the URI string</srm:Use>
+    <rdfs:label xml:lang="en">URI</rdfs:label>
+    <rdfs:label xml:lang="es">URI</rdfs:label>
+    <srm:OMGHDTF>COAS::TechnologyInstanceLocator</srm:OMGHDTF>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#STRING"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#DATA_VALUE"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#scheme"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#query"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>A reference to an object which conforms to the Universal Resource
+Identifier (URI) standarad, as defined by W3C RFC 2936</srm:Purpose>
+    <srm:HL7>TBD</srm:HL7>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#fragment_id"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#path"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_COUNT">
+    <srm:ISO18308>STR 3.2-3.4</srm:ISO18308>
+    <srm:HL7>INT</srm:HL7>
+    <srm:MisUse>Not used for amounts of physical entities (which all have units)</srm:MisUse>
+    <srm:Use>Used for countable types such as pregnancies and steps (taken by a physiotherapy patient), number of cigarettes smoded in a day</srm:Use>
+    <rdfs:subClassOf rdf:resource="#DV_QUANTIFIED"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#magnitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>Countable quantities</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_COUNT"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#diff_type"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="LIST_DV_TEXT">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_TEXT"/>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#item"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#LIST_T"/>
+  </owl:Class>
+  <owl:Class rdf:ID="LIST_TERM_MAPPING">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#item"/>
+        <owl:allValuesFrom rdf:resource="#TERM_MAPPING"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#LIST_T"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_DATE_TIME">
+    <rdfs:label xml:lang="en">DATE TIME</rdfs:label>
+    <srm:GEHR>G1_DATE_TIME</srm:GEHR>
+    <srm:Purpose>Represents an aboslute point in time, specified to the second. 
+In canonical form</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#hour"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Synapses>DTValue attribute of DateTime</srm:Synapses>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#day"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#diff_type"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DV_DURATION"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#second"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_WORLD_TIME"/>
+    </rdfs:subClassOf>
+    <srm:CEN>TOCD choice Quantifiable Observation Data ITem</srm:CEN>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#magnitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Use>Used for recording a precise point in real world time</srm:Use>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#fractional_second"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:OMGHDTF>COAS::DateTime</srm:OMGHDTF>
+    <srm:ISO18308>STR 3.7, 3.10</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#minute"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">FECHA Y HORA</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#year"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#month"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_PERIODIC_TIME_SPECIFICATION">
+    <rdfs:subClassOf rdf:resource="#DV_TIME_SPECIFICATION"/>
+    <srm:Use>Used in therapeutic prescriptions, expressed as INSTRUCTIONS 
+in the openEHR</srm:Use>
+    <srm:Purpose>Specifies periodic points in time, linked to the calendar (phase-linked), 
+or a real world event, such as 'breakfast'. Based on the HL7v3 data types
+PIVL&lt;T> and EIVL&lt;T></srm:Purpose>
+    <srm:ISO18308>STR 3.9</srm:ISO18308>
+    <rdfs:label xml:lang="en">PERIODIC TIME SPECIFICATION</rdfs:label>
+    <rdfs:label xml:lang="es">ESPECIFICACION DE INSTANTES PERIODICOS</rdfs:label>
+    <srm:HL7>PIVL&lt;T>, EIVL&lt;T></srm:HL7>
+    <srm:CEN>The Duration data value class privdes for the specification of time 
+intervals, and also for a simple string description of the periodicity</srm:CEN>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_BOOLEAN">
+    <srm:MisUse>Should not be used as a replacement for naively modelled enumerated types such as male/female etc... Such values whould be coded, and in any case the enumeration often has more than two values.</srm:MisUse>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Synapses>A special use of the Numeric class is defined to represent the Boolean data type, limiting the permitted values to zero or one.</srm:Synapses>
+    <srm:HL7>BL</srm:HL7>
+    <srm:Purpose>Items which are truly boolean data, such as true/false of yes/no answers</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="es">LOGICO</rdfs:label>
+    <srm:CEN>Not provided as a subtype of Data Item</srm:CEN>
+    <srm:Use>For such data, it is important to devise the meanings (usually questions in subjective data) carefully, so that the only allowed results are in fact true or false</srm:Use>
+    <rdfs:subClassOf rdf:resource="#DATA_VALUE"/>
+    <rdfs:label xml:lang="en">BOOLEAN</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_MULTIMEDIA">
+    <srm:Synapses>The Bulky Data class provides for the representation and storage of all binary data classified by its MIME type</srm:Synapses>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#compression_algorithm"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#size"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:ISO18308>STR 3.1</srm:ISO18308>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#integrity_check"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#DV_ENCAPSULATED"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#thumbnail"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:HL7>ED</srm:HL7>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#alternate_text"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:GEHR>G1_MULTIMEDIA_DATA</srm:GEHR>
+    <srm:Purpose>A specialisation of DV_ENCAPSULATED for audiviosual and biosignal 
+types. Includes further metadata relating to multimedia types which are
+not applicalbe ot other subtypes of DV_ENCAPSULATED</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#integrity_check_algorithm"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">MULTIMEDIA</rdfs:label>
+    <rdfs:label xml:lang="es">MULTIMEDIA</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#data"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#uri"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#media_type"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_TIME">
+    <srm:Synapses>DTValue attribute of DateTime</srm:Synapses>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#minute"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Use>Used ofr recording real world times, rather than scientically measured fine amounts of time</srm:Use>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_DURATION"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#diff_type"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:HL7>TS</srm:HL7>
+    <srm:ISO18308>STR 3.7, 3.10</srm:ISO18308>
+    <srm:Purpose>Represents an aboslute point in time from an origin usually interpreted
+as meaning the start of the cuyrrent day, specified to the second</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#second"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#fractional_second"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">TIME</rdfs:label>
+    <srm:CEN>TOCD choice Quantifiable Observation Data Item</srm:CEN>
+    <rdfs:label xml:lang="es">HORA</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#hour"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_WORLD_TIME"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_WORLD_TIME">
+    <rdfs:label xml:lang="es">HORA MUNDIAL</rdfs:label>
+    <srm:Use>Used for recording dates and/or times in real world time</srm:Use>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_TIME"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <protege:abstract>true</protege:abstract>
+    <srm:Purpose>Abstract concept of time on the real world timeline. All dates assumed
+to be  in the Gregorian calendar</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#timezone"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#DV_CUSTOMARY_QUANTITY"/>
+    <rdfs:label xml:lang="en">WORLD TIME</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_ORDINAL">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DV_ORDERED"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:Purpose>Models rankings and scores, e.g. pain, Apgar values, etc</srm:Purpose>
+    <srm:ISO18308>STR 3.2</srm:ISO18308>
+    <rdfs:label xml:lang="es">ORDINAL</rdfs:label>
+    <rdfs:label xml:lang="en">ORDINAL</rdfs:label>
+    <srm:HL7>QTY</srm:HL7>
+    <srm:Use>for recording any clinical datum which is customarily recorded using symbolic values. e.g. the results on a urinalysis strip ^neg, trace, +, ++,++++ are used for leucocytes, protein, nitrites etc...</srm:Use>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_QUANTITY">
+    <srm:Use>Can be used for time durations, where it is more convenient to treat these
+as simply a number of seconds rather than days, months, years.</srm:Use>
+    <srm:OMGHDTF>COAS::Numeric</srm:OMGHDTF>
+    <rdfs:label xml:lang="es">CANTIDAD</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#magnitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#precision"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#DV_MEASURABLE"/>
+    <srm:Purpose>Concrete type representing scientific quantities, i.e. quentities expressed
+as a single value and a single, optional units.</srm:Purpose>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#units"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:GEHR>G1_QUANTITY</srm:GEHR>
+    <srm:ISO18308>STR 3.2-3.4</srm:ISO18308>
+    <srm:Synapses>Quantity</srm:Synapses>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#NUMERIC"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:HL7>PhysicalQuantity (PQ)</srm:HL7>
+    <srm:CEN>Quantifiable Data Item; Measurement data value class</srm:CEN>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#diff_type"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DV_QUANTITY"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">QUANTITY</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_ORDERED">
+    <rdfs:label xml:lang="en">ORDERED</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#DATA_VALUE"/>
+    <srm:Use>Data value types which are to be used as limits in the DV_INTERVAL_T
+class must inherit from this class, and implement the function 
+is_strictly_comparable_to to ensure that instances compare meaningfully.</srm:Use>
+    <protege:abstract>true</protege:abstract>
+    <srm:Purpose>Abstract class defining the concept of ordered values, which includes ordinals as well as true quantities. It defines the functions less_tan and is_strictly_comparable_to, the latter of which must evaluate to True for isntances being compared with the less_than function, or used as limits in the DV_INTERVAL_T</srm:Purpose>
+    <rdfs:label xml:lang="es">VALORES DE ORDEN</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#reference_ranges"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_QUANTIFIED"/>
+          <owl:Class rdf:about="#DV_ORDINAL"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="REFERENCE_RANGE_T">
+    <srm:Purpose>Defines a named range to be associate with any ORDERED datum Each such range is particular to the patient and context, and any other factor which affects ranges </srm:Purpose>
+    <rdfs:label xml:lang="en">REFERENCE RANGE</rdfs:label>
+    <srm:Use>May be used to represent normal, therapeutic, dangerous, critical etc ranges</srm:Use>
+    <srm:ISO18308>STR 3.13</srm:ISO18308>
+    <rdfs:label xml:lang="es">RANGO DE REFERENCIA</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#range"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#meaning"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DV_INTERVAL_T">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DV_ORDERED"/>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#lower"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <srm:HL7>IVL&lt;T:QTY></srm:HL7>
+    <rdfs:label xml:lang="es">INTERVALO DE T</rdfs:label>
+    <srm:ISO18308>STR 3.13</srm:ISO18308>
+    <rdfs:label xml:lang="en">INTERVAL T</rdfs:label>
+    <srm:Use>Used to define intervals</srm:Use>
+    <srm:Synapses>QuantityRange+ability to specify if the range is incusive or exclusive separately of the maximun and minimum values</srm:Synapses>
+    <rdfs:subClassOf rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#INTERVAL_T"/>
+    <srm:Purpose>Generic class defining an interval of a comparable type.
+an interval is a contiguous subrange of a comparable base type</srm:Purpose>
+    <srm:GEHR>G1_QUANTITY_RANGE</srm:GEHR>
+    <srm:CEN>Time Interval</srm:CEN>
+    <rdfs:subClassOf rdf:resource="#DATA_VALUE"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://trajano.us.es/~isabel/EHR/Support_RM.owl#upper"/>
+        <owl:allValuesFrom rdf:resource="#DV_ORDERED"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="target">
+    <rdfs:label xml:lang="es">objetivo</rdfs:label>
+    <rdfs:range rdf:resource="#CODE_PHRASE"/>
+    <rdfs:label xml:lang="en">target</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#TERM_MAPPING"/>
+          <owl:Class rdf:about="#DV_EHR_URI"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="timezone">
+    <rdfs:comment>offset from Universal Coordinated Time, in the range -1200 +1200</rdfs:comment>
+    <rdfs:range rdf:resource="#DV_DURATION"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_WORLD_TIME"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="uri">
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+    <rdfs:label xml:lang="es">uri</rdfs:label>
+    <rdfs:label xml:lang="en">uri</rdfs:label>
+    <rdfs:range rdf:resource="#DV_URI"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="integrity_check_algorithm">
+    <rdfs:label xml:lang="es">chequeo de comprobacion de integridad</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+    <rdfs:label xml:lang="en">integrity check algorithm</rdfs:label>
+    <rdfs:range rdf:resource="#CODE_PHRASE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="data">
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="defining_code">
+    <rdfs:comment>The term which the value attribute is the textual rendition of</rdfs:comment>
+    <rdfs:range rdf:resource="#CODE_PHRASE"/>
+    <rdfs:label xml:lang="en">definition</rdfs:label>
+    <rdfs:label xml:lang="es">definicion</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_CODED_TEXT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="charset">
+    <rdfs:label xml:lang="es"></rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_ENCAPSULATED"/>
+          <owl:Class rdf:about="#DV_TEXT"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="en">charset</rdfs:label>
+    <rdfs:range rdf:resource="#CODE_PHRASE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="diff_type">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_COUNT"/>
+          <owl:Class rdf:about="#DV_QUANTITY"/>
+          <owl:Class rdf:about="#DV_QUANTIFIED"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="integrity_check">
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+    <rdfs:label xml:lang="en">integrity check</rdfs:label>
+    <rdfs:label xml:lang="es">chequeo de integridad</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="range">
+    <rdfs:range rdf:resource="#DV_INTERVAL_T"/>
+    <rdfs:domain rdf:resource="#REFERENCE_RANGE_T"/>
+    <rdfs:label xml:lang="en">range</rdfs:label>
+    <rdfs:label xml:lang="es">rango</rdfs:label>
+    <rdfs:comment>The data range for this meaning</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="numerator">
+    <rdfs:range rdf:resource="#DV_QUANTIFIED"/>
+    <rdfs:label xml:lang="es">numerador</rdfs:label>
+    <rdfs:label xml:lang="en">numerator</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_QUANTITY_RATIO"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="thumbnail">
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+    <rdfs:range rdf:resource="#DV_MULTIMEDIA"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="symbol">
+    <rdfs:domain rdf:resource="#DV_ORDINAL"/>
+    <rdfs:comment>Coded textual representation of this value in the enumaration, which may be strings made from "+" symbols, or other enumerations of the terms such as "mild", "moderate", "sever", or even the same number series as the values</rdfs:comment>
+    <rdfs:range rdf:resource="#DV_CODED_TEXT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="items">
+    <rdfs:comment>Items making up the paragraph, each of which is a text item</rdfs:comment>
+    <rdfs:domain rdf:resource="#DV_PARAGRAPH"/>
+    <rdfs:label xml:lang="en">items</rdfs:label>
+    <rdfs:label xml:lang="es">elementos</rdfs:label>
+    <rdfs:range rdf:resource="#LIST_DV_TEXT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="mappings">
+    <rdfs:label xml:lang="es">mapeos</rdfs:label>
+    <rdfs:comment>terms from other terminologis most closely matching this term, typically used where the originator of information uses a local terminology but also supplies one or more equivalents from well-know terminologies</rdfs:comment>
+    <rdfs:label xml:lang="en">mappings</rdfs:label>
+    <rdfs:range rdf:resource="#LIST_TERM_MAPPING"/>
+    <rdfs:domain rdf:resource="#DV_TEXT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="meaning">
+    <rdfs:range rdf:resource="#DV_TEXT"/>
+    <rdfs:label xml:lang="en">meaning</rdfs:label>
+    <rdfs:comment>Term whose value indicates the meaning of this range (normal, critical, therapeutic...)</rdfs:comment>
+    <rdfs:domain rdf:resource="#REFERENCE_RANGE_T"/>
+    <rdfs:label xml:lang="es">significado</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="period">
+    <rdfs:domain rdf:resource="#DV_PERIODIC_TIME_SPECIFICATION"/>
+    <rdfs:range rdf:resource="#DV_DURATION"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="reference_ranges">
+    <rdfs:comment>Optional tagged ranges for this value in its particular measurement context</rdfs:comment>
+    <rdfs:label xml:lang="es">rangos de referencia</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_ORDERED"/>
+    <rdfs:range rdf:resource="#LIST_REFERENCE_RANGE"/>
+    <rdfs:label xml:lang="en">reference ranges</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compression_algorithm">
+    <rdfs:label xml:lang="en">compression algorithm</rdfs:label>
+    <rdfs:range rdf:resource="#CODE_PHRASE"/>
+    <rdfs:label xml:lang="es">algoritmo de compresion</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hyperlink">
+    <rdfs:domain rdf:resource="#DV_TEXT"/>
+    <rdfs:label xml:lang="en">hyperlink</rdfs:label>
+    <rdfs:comment>Optional link sitting behind a section of plain text or coded term item</rdfs:comment>
+    <rdfs:range rdf:resource="#DV_URI"/>
+    <rdfs:label xml:lang="es">hipervinculo</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="denominator">
+    <rdfs:label xml:lang="en">denominator</rdfs:label>
+    <rdfs:label xml:lang="es">denominador</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_QUANTITY_RATIO"/>
+    <rdfs:range rdf:resource="#DV_QUANTIFIED"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="purpose">
+    <rdfs:label xml:lang="es">proposito</rdfs:label>
+    <rdfs:domain rdf:resource="#TERM_MAPPING"/>
+    <rdfs:range rdf:resource="#DV_CODED_TEXT"/>
+    <rdfs:label xml:lang="en">purpose</rdfs:label>
+    <rdfs:comment>Purpose of the mapping. e.g. automated data mining, billing, interoperability...</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="media_type">
+    <rdfs:range rdf:resource="#CODE_PHRASE"/>
+    <rdfs:label xml:lang="es">tipo de medio</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+    <rdfs:label xml:lang="en">media type</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="terminology_id">
+    <rdfs:label xml:lang="en">terminology id</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Identifier of the distinct terminology from which the code_string was extracted
+Range must be added in the common_RM because terminology_ID is defined there</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#COORDINATED_TERM"/>
+          <owl:Class rdf:about="#CODE_PHRASE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="es">identificador de terminologia</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="language">
+    <rdfs:label xml:lang="en">language</rdfs:label>
+    <rdfs:range rdf:resource="#CODE_PHRASE"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_ENCAPSULATED"/>
+          <owl:Class rdf:about="#DV_TEXT"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="es">idioma</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="day">
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:first>1</rdf:first>
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first>2</rdf:first>
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:first>6</rdf:first>
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:first>7</rdf:first>
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:first>8</rdf:first>
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:first>10</rdf:first>
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:rest rdf:parseType="Resource">
+                                  <rdf:first>14</rdf:first>
+                                  <rdf:rest rdf:parseType="Resource">
+                                    <rdf:rest rdf:parseType="Resource">
+                                      <rdf:rest rdf:parseType="Resource">
+                                        <rdf:rest rdf:parseType="Resource">
+                                          <rdf:first>18</rdf:first>
+                                          <rdf:rest rdf:parseType="Resource">
+                                            <rdf:first>19</rdf:first>
+                                            <rdf:rest rdf:parseType="Resource">
+                                              <rdf:first>20</rdf:first>
+                                              <rdf:rest rdf:parseType="Resource">
+                                                <rdf:first>21</rdf:first>
+                                                <rdf:rest rdf:parseType="Resource">
+                                                  <rdf:first>22</rdf:first>
+                                                  <rdf:rest rdf:parseType="Resource">
+                                                    <rdf:first
+                                                    >23</rdf:first>
+                                                    <rdf:rest rdf:parseType="Resource">
+                                                      <rdf:first
+                                                      >24</rdf:first>
+                                                      <rdf:rest rdf:parseType="Resource">
+                                                        <rdf:first
+                                                        >25</rdf:first>
+                                                        <rdf:rest rdf:parseType="Resource">
+                                                          <rdf:rest rdf:parseType="Resource">
+                                                            <rdf:rest rdf:parseType="Resource">
+                                                              <rdf:first
+                                                              
+                                                              >28</rdf:first>
+                                                              <rdf:rest rdf:parseType="Resource">
+    <rdf:first>29</rdf:first>
+    <rdf:rest rdf:parseType="Resource">
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first>31</rdf:first>
+        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+      </rdf:rest>
+      <rdf:first>30</rdf:first>
+    </rdf:rest>                                               </rdf:rest>
+                                                            </rdf:rest>
+                                                            <rdf:first
+                                                            >27</rdf:first>
+                                                          </rdf:rest>
+                                                          <rdf:first
+                                                          >26</rdf:first>
+                                                        </rdf:rest>
+                                                      </rdf:rest>
+                                                    </rdf:rest>
+                                                  </rdf:rest>
+                                                </rdf:rest>
+                                              </rdf:rest>
+                                            </rdf:rest>
+                                          </rdf:rest>
+                                        </rdf:rest>
+                                        <rdf:first>17</rdf:first>
+                                      </rdf:rest>
+                                      <rdf:first>16</rdf:first>
+                                    </rdf:rest>
+                                    <rdf:first>15</rdf:first>
+                                  </rdf:rest>
+                                </rdf:rest>
+                                <rdf:first>13</rdf:first>
+                              </rdf:rest>
+                              <rdf:first>12</rdf:first>
+                            </rdf:rest>
+                            <rdf:first>11</rdf:first>
+                          </rdf:rest>
+                        </rdf:rest>
+                      </rdf:rest>
+                    </rdf:rest>
+                  </rdf:rest>
+                  <rdf:first>5</rdf:first>
+                </rdf:rest>
+                <rdf:first>4</rdf:first>
+              </rdf:rest>
+              <rdf:first>3</rdf:first>
+            </rdf:rest>
+          </rdf:rest>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+    <rdfs:label xml:lang="es">dia</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_DATE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="en">day</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="is_simple">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_ORDERED"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:comment>True if this quantity has no reference ranges, or accuracy</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="is_normal">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_ORDERED"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:comment>Value is in the normal range if ther is one, otherwise True</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="seconds">
+    <rdfs:label xml:lang="en">seconds</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:label xml:lang="es">segundos</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_DURATION"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="target_is_ehr">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="days">
+    <rdfs:label xml:lang="en">days</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_DURATION"/>
+    <rdfs:label xml:lang="es"></rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="second">
+    <rdfs:label xml:lang="es">segundo</rdfs:label>
+    <rdfs:label xml:lang="en">second</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_TIME"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first>2</rdf:first>
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:first>4</rdf:first>
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:first>7</rdf:first>
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:first>8</rdf:first>
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:first>9</rdf:first>
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:first>10</rdf:first>
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:first>12</rdf:first>
+                                <rdf:rest rdf:parseType="Resource">
+                                  <rdf:rest rdf:parseType="Resource">
+                                    <rdf:first>14</rdf:first>
+                                    <rdf:rest rdf:parseType="Resource">
+                                      <rdf:rest rdf:parseType="Resource">
+                                        <rdf:rest rdf:parseType="Resource">
+                                          <rdf:rest rdf:parseType="Resource">
+                                            <rdf:first>18</rdf:first>
+                                            <rdf:rest rdf:parseType="Resource">
+                                              <rdf:first>19</rdf:first>
+                                              <rdf:rest rdf:parseType="Resource">
+                                                <rdf:rest rdf:parseType="Resource">
+                                                  <rdf:first>21</rdf:first>
+                                                  <rdf:rest rdf:parseType="Resource">
+                                                    <rdf:first
+                                                    >22</rdf:first>
+                                                    <rdf:rest rdf:parseType="Resource">
+                                                      <rdf:rest rdf:parseType="Resource">
+                                                        <rdf:rest rdf:parseType="Resource">
+                                                          <rdf:rest rdf:parseType="Resource">
+                                                            <rdf:rest rdf:parseType="Resource">
+                                                              <rdf:first
+                                                              
+                                                              >27</rdf:first>
+                                                              <rdf:rest rdf:parseType="Resource">
+    <rdf:first>28</rdf:first>
+    <rdf:rest rdf:parseType="Resource">
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first>31</rdf:first>
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first>32</rdf:first>
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:first>34</rdf:first>
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:first>36</rdf:first>
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:first>39</rdf:first>
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:first>40</rdf:first>
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:first>41</rdf:first>
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:first>42</rdf:first>
+                                <rdf:rest rdf:parseType="Resource">
+                                  <rdf:first>43</rdf:first>
+                                  <rdf:rest rdf:parseType="Resource">
+                                    <rdf:first>44</rdf:first>
+                                    <rdf:rest rdf:parseType="Resource">
+                                      <rdf:first>45</rdf:first>
+                                      <rdf:rest rdf:parseType="Resource">
+                                        <rdf:first>46</rdf:first>
+                                        <rdf:rest rdf:parseType="Resource">
+                                          <rdf:first>47</rdf:first>
+                                          <rdf:rest rdf:parseType="Resource">
+                                            <rdf:rest rdf:parseType="Resource">
+                                              <rdf:first>49</rdf:first>
+                                              <rdf:rest rdf:parseType="Resource">
+                                                <rdf:rest rdf:parseType="Resource">
+                                                  <rdf:first>51</rdf:first>
+                                                  <rdf:rest rdf:parseType="Resource">
+                                                    <rdf:first
+                                                    >52</rdf:first>
+                                                    <rdf:rest rdf:parseType="Resource">
+                                                      <rdf:rest rdf:parseType="Resource">
+                                                        <rdf:first
+                                                        >54</rdf:first>
+                                                        <rdf:rest rdf:parseType="Resource">
+                                                          <rdf:rest rdf:parseType="Resource">
+                                                            <rdf:first
+                                                            >56</rdf:first>
+                                                            <rdf:rest rdf:parseType="Resource">
+                                                              <rdf:rest rdf:parseType="Resource">
+    <rdf:rest rdf:parseType="Resource">
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first>0</rdf:first>
+        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+      </rdf:rest>
+      <rdf:first>59</rdf:first>
+    </rdf:rest>
+    <rdf:first>58</rdf:first>                                 </rdf:rest>
+                                                              <rdf:first
+                                                              
+                                                              >57</rdf:first>
+                                                            </rdf:rest>
+                                                          </rdf:rest>
+                                                          <rdf:first
+                                                          >55</rdf:first>
+                                                        </rdf:rest>
+                                                      </rdf:rest>
+                                                      <rdf:first
+                                                      >53</rdf:first>
+                                                    </rdf:rest>
+                                                  </rdf:rest>
+                                                </rdf:rest>
+                                                <rdf:first>50</rdf:first>
+                                              </rdf:rest>
+                                            </rdf:rest>
+                                            <rdf:first>48</rdf:first>
+                                          </rdf:rest>
+                                        </rdf:rest>
+                                      </rdf:rest>
+                                    </rdf:rest>
+                                  </rdf:rest>
+                                </rdf:rest>
+                              </rdf:rest>
+                            </rdf:rest>
+                          </rdf:rest>
+                        </rdf:rest>
+                        <rdf:first>38</rdf:first>
+                      </rdf:rest>
+                      <rdf:first>37</rdf:first>
+                    </rdf:rest>
+                  </rdf:rest>
+                  <rdf:first>35</rdf:first>
+                </rdf:rest>
+              </rdf:rest>
+              <rdf:first>33</rdf:first>
+            </rdf:rest>
+          </rdf:rest>
+        </rdf:rest>
+        <rdf:first>30</rdf:first>
+      </rdf:rest>
+      <rdf:first>29</rdf:first>
+    </rdf:rest>                                               </rdf:rest>
+                                                            </rdf:rest>
+                                                            <rdf:first
+                                                            >26</rdf:first>
+                                                          </rdf:rest>
+                                                          <rdf:first
+                                                          >25</rdf:first>
+                                                        </rdf:rest>
+                                                        <rdf:first
+                                                        >24</rdf:first>
+                                                      </rdf:rest>
+                                                      <rdf:first
+                                                      >23</rdf:first>
+                                                    </rdf:rest>
+                                                  </rdf:rest>
+                                                </rdf:rest>
+                                                <rdf:first>20</rdf:first>
+                                              </rdf:rest>
+                                            </rdf:rest>
+                                          </rdf:rest>
+                                          <rdf:first>17</rdf:first>
+                                        </rdf:rest>
+                                        <rdf:first>16</rdf:first>
+                                      </rdf:rest>
+                                      <rdf:first>15</rdf:first>
+                                    </rdf:rest>
+                                  </rdf:rest>
+                                  <rdf:first>13</rdf:first>
+                                </rdf:rest>
+                              </rdf:rest>
+                              <rdf:first>11</rdf:first>
+                            </rdf:rest>
+                          </rdf:rest>
+                        </rdf:rest>
+                      </rdf:rest>
+                    </rdf:rest>
+                    <rdf:first>6</rdf:first>
+                  </rdf:rest>
+                  <rdf:first>5</rdf:first>
+                </rdf:rest>
+              </rdf:rest>
+              <rdf:first>3</rdf:first>
+            </rdf:rest>
+          </rdf:rest>
+          <rdf:first>1</rdf:first>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="fragment_id">
+    <rdfs:domain rdf:resource="#DV_URI"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="month">
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:first>1</rdf:first>
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:first>3</rdf:first>
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:first>4</rdf:first>
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:first>8</rdf:first>
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:first>9</rdf:first>
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:first>11</rdf:first>
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:first>12</rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              </rdf:rest>
+                            </rdf:rest>
+                            <rdf:first>10</rdf:first>
+                          </rdf:rest>
+                        </rdf:rest>
+                      </rdf:rest>
+                      <rdf:first>7</rdf:first>
+                    </rdf:rest>
+                    <rdf:first>6</rdf:first>
+                  </rdf:rest>
+                  <rdf:first>5</rdf:first>
+                </rdf:rest>
+              </rdf:rest>
+            </rdf:rest>
+            <rdf:first>2</rdf:first>
+          </rdf:rest>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+    <rdfs:label xml:lang="es">mes</rdfs:label>
+    <rdfs:label xml:lang="en">month</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_DATE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="section_id">
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="target_is_section">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="minute_known">
+    <rdfs:label xml:lang="es">minuto conocido</rdfs:label>
+    <rdfs:label xml:lang="en">minute known</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_PARTIAL_TIME"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="fractional_second">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdfs:label xml:lang="es">fraccion de segundo</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_TIME"/>
+          <owl:Class rdf:about="#DV_DURATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="en">fractional second</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="magnitude">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_COUNT"/>
+          <owl:Class rdf:about="#DV_QUANTITY"/>
+          <owl:Class rdf:about="#DV_QUANTIFIED"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="precision">
+    <rdfs:comment>precision to which the value of the quantity is expressed, in terms of number of significant figures. 0 implies no precision</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:domain rdf:resource="#DV_QUANTITY"/>
+    <rdfs:label xml:lang="es">precision</rdfs:label>
+    <rdfs:label xml:lang="en">precision</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="scheme">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#DV_URI"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="event_alignment">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_TIME_SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="target_is_transaction">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="organiser_id">
+    <rdfs:label xml:lang="es">id de organizador</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">organiser_id</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="target_is_composition">
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="composition_id">
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+    <rdfs:label xml:lang="en">transaction id</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="es">id de transaccion</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="query">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#DV_URI"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="calendar_alignment">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_TIME_SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="code_string">
+    <rdfs:label xml:lang="en">code string</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#COORDINATED_TERM"/>
+          <owl:Class rdf:about="#CODE_PHRASE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The key used by the terminology service to identify a concept or coordination of concepts. Is most likely parsable inside the terminology service, but nothing can be assumed about its syntax outside that context.</rdfs:comment>
+    <rdfs:label xml:lang="es">cadena codificada</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="is_terminal">
+    <rdfs:label xml:lang="en">is terminal</rdfs:label>
+    <rdfs:label xml:lang="es">es terminal</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="#DV_STATE"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="month_known">
+    <rdfs:label xml:lang="es">mes conocido</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_PARTIAL_DATE"/>
+    <rdfs:label xml:lang="en">month known</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="target_is_entry">
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="alternate_text">
+    <rdfs:label xml:lang="en">alternate text</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_MULTIMEDIA"/>
+    <rdfs:label xml:lang="es">texto alternativo</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="minute">
+    <rdfs:label xml:lang="en">minute</rdfs:label>
+    <rdfs:label xml:lang="es">minuto</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_TIME"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:first>1</rdf:first>
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:first>5</rdf:first>
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:first>6</rdf:first>
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:first>7</rdf:first>
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:rest rdf:parseType="Resource">
+                                  <rdf:first>13</rdf:first>
+                                  <rdf:rest rdf:parseType="Resource">
+                                    <rdf:rest rdf:parseType="Resource">
+                                      <rdf:rest rdf:parseType="Resource">
+                                        <rdf:first>16</rdf:first>
+                                        <rdf:rest rdf:parseType="Resource">
+                                          <rdf:first>17</rdf:first>
+                                          <rdf:rest rdf:parseType="Resource">
+                                            <rdf:rest rdf:parseType="Resource">
+                                              <rdf:first>19</rdf:first>
+                                              <rdf:rest rdf:parseType="Resource">
+                                                <rdf:rest rdf:parseType="Resource">
+                                                  <rdf:first>21</rdf:first>
+                                                  <rdf:rest rdf:parseType="Resource">
+                                                    <rdf:first
+                                                    >22</rdf:first>
+                                                    <rdf:rest rdf:parseType="Resource">
+                                                      <rdf:rest rdf:parseType="Resource">
+                                                        <rdf:first
+                                                        >24</rdf:first>
+                                                        <rdf:rest rdf:parseType="Resource">
+                                                          <rdf:rest rdf:parseType="Resource">
+                                                            <rdf:first
+                                                            >26</rdf:first>
+                                                            <rdf:rest rdf:parseType="Resource">
+                                                              <rdf:rest rdf:parseType="Resource">
+    <rdf:rest rdf:parseType="Resource">
+      <rdf:first>29</rdf:first>
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first>32</rdf:first>
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:first>33</rdf:first>
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:first>36</rdf:first>
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:first>38</rdf:first>
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:first>39</rdf:first>
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:first>40</rdf:first>
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:rest rdf:parseType="Resource">
+                                  <rdf:rest rdf:parseType="Resource">
+                                    <rdf:rest rdf:parseType="Resource">
+                                      <rdf:rest rdf:parseType="Resource">
+                                        <rdf:first>46</rdf:first>
+                                        <rdf:rest rdf:parseType="Resource">
+                                          <rdf:first>47</rdf:first>
+                                          <rdf:rest rdf:parseType="Resource">
+                                            <rdf:rest rdf:parseType="Resource">
+                                              <rdf:rest rdf:parseType="Resource">
+                                                <rdf:first>50</rdf:first>
+                                                <rdf:rest rdf:parseType="Resource">
+                                                  <rdf:rest rdf:parseType="Resource">
+                                                    <rdf:rest rdf:parseType="Resource">
+                                                      <rdf:first
+                                                      >53</rdf:first>
+                                                      <rdf:rest rdf:parseType="Resource">
+                                                        <rdf:rest rdf:parseType="Resource">
+                                                          <rdf:first
+                                                          >55</rdf:first>
+                                                          <rdf:rest rdf:parseType="Resource">
+                                                            <rdf:rest rdf:parseType="Resource">
+                                                              <rdf:first
+                                                              
+                                                              >57</rdf:first>
+                                                              <rdf:rest rdf:parseType="Resource">
+    <rdf:first>58</rdf:first>
+    <rdf:rest rdf:parseType="Resource">
+      <rdf:first>59</rdf:first>
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first>0</rdf:first>
+        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+      </rdf:rest>
+    </rdf:rest>                                               </rdf:rest>
+                                                            </rdf:rest>
+                                                            <rdf:first
+                                                            >56</rdf:first>
+                                                          </rdf:rest>
+                                                        </rdf:rest>
+                                                        <rdf:first
+                                                        >54</rdf:first>
+                                                      </rdf:rest>
+                                                    </rdf:rest>
+                                                    <rdf:first
+                                                    >52</rdf:first>
+                                                  </rdf:rest>
+                                                  <rdf:first>51</rdf:first>
+                                                </rdf:rest>
+                                              </rdf:rest>
+                                              <rdf:first>49</rdf:first>
+                                            </rdf:rest>
+                                            <rdf:first>48</rdf:first>
+                                          </rdf:rest>
+                                        </rdf:rest>
+                                      </rdf:rest>
+                                      <rdf:first>45</rdf:first>
+                                    </rdf:rest>
+                                    <rdf:first>44</rdf:first>
+                                  </rdf:rest>
+                                  <rdf:first>43</rdf:first>
+                                </rdf:rest>
+                                <rdf:first>42</rdf:first>
+                              </rdf:rest>
+                              <rdf:first>41</rdf:first>
+                            </rdf:rest>
+                          </rdf:rest>
+                        </rdf:rest>
+                      </rdf:rest>
+                      <rdf:first>37</rdf:first>
+                    </rdf:rest>
+                  </rdf:rest>
+                  <rdf:first>35</rdf:first>
+                </rdf:rest>
+                <rdf:first>34</rdf:first>
+              </rdf:rest>
+            </rdf:rest>
+          </rdf:rest>
+          <rdf:first>31</rdf:first>
+        </rdf:rest>
+        <rdf:first>30</rdf:first>
+      </rdf:rest>
+    </rdf:rest>
+    <rdf:first>28</rdf:first>                                 </rdf:rest>
+                                                              <rdf:first
+                                                              
+                                                              >27</rdf:first>
+                                                            </rdf:rest>
+                                                          </rdf:rest>
+                                                          <rdf:first
+                                                          >25</rdf:first>
+                                                        </rdf:rest>
+                                                      </rdf:rest>
+                                                      <rdf:first
+                                                      >23</rdf:first>
+                                                    </rdf:rest>
+                                                  </rdf:rest>
+                                                </rdf:rest>
+                                                <rdf:first>20</rdf:first>
+                                              </rdf:rest>
+                                            </rdf:rest>
+                                            <rdf:first>18</rdf:first>
+                                          </rdf:rest>
+                                        </rdf:rest>
+                                      </rdf:rest>
+                                      <rdf:first>15</rdf:first>
+                                    </rdf:rest>
+                                    <rdf:first>14</rdf:first>
+                                  </rdf:rest>
+                                </rdf:rest>
+                                <rdf:first>12</rdf:first>
+                              </rdf:rest>
+                              <rdf:first>11</rdf:first>
+                            </rdf:rest>
+                            <rdf:first>10</rdf:first>
+                          </rdf:rest>
+                          <rdf:first>9</rdf:first>
+                        </rdf:rest>
+                        <rdf:first>8</rdf:first>
+                      </rdf:rest>
+                    </rdf:rest>
+                  </rdf:rest>
+                </rdf:rest>
+                <rdf:first>4</rdf:first>
+              </rdf:rest>
+              <rdf:first>3</rdf:first>
+            </rdf:rest>
+            <rdf:first>2</rdf:first>
+          </rdf:rest>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="accuracy_is_percent">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="#DV_QUANTIFIED"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="entry_id">
+    <rdfs:label xml:lang="es">id de entrada</rdfs:label>
+    <rdfs:label xml:lang="en">entry id</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sign">
+    <rdfs:label xml:lang="en">sign</rdfs:label>
+    <rdfs:label xml:lang="es">sentido</rdfs:label>
+    <rdfs:domain rdf:resource="#DV_DURATION"/>
+    <rdfs:comment>direction of duration with respect to a notional reference point</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="size">
+    <rdfs:label xml:lang="en">size</rdfs:label>
+    <rdfs:label xml:lang="es">tamaño</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:domain rdf:resource="#DV_ENCAPSULATED"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="year">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_DATE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="en">year</rdfs:label>
+    <rdfs:label xml:lang="es"></rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="ehr_id">
+    <rdfs:domain rdf:resource="#DV_EHR_URI"/>
+    <rdfs:label xml:lang="en">id de ehr</rdfs:label>
+    <rdfs:label xml:lang="es">ehr_id</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="value">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_TIME_SPECIFICATION"/>
+          <owl:Class rdf:about="#DV_BOOLEAN"/>
+          <owl:Class rdf:about="#DV_TEXT"/>
+          <owl:Class rdf:about="#DV_URI"/>
+          <owl:Class rdf:about="#DV_STATE"/>
+          <owl:Class rdf:about="#DV_QUANTITY"/>
+          <owl:Class rdf:about="#DV_ORDINAL"/>
+          <owl:Class rdf:about="#DV_PARSABLE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="en">value</rdfs:label>
+    <rdfs:label xml:lang="es">valor</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hours">
+    <rdfs:domain rdf:resource="#DV_DURATION"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:label xml:lang="en">hours</rdfs:label>
+    <rdfs:label xml:lang="es">horas</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="path">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#DV_URI"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="match">
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first>=</rdf:first>
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:first>&lt;</rdf:first>
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                <rdf:first>?</rdf:first>
+              </rdf:rest>
+            </rdf:rest>
+          </rdf:rest>
+          <rdf:first>></rdf:first>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#TERM_MAPPING"/>
+    <rdfs:comment>The relative match of the target term with respect to the mapped text item. Result meanings
++1: mapping is to a broader ter
+0: mapping is to a equivalent to the original item
+-1:the mapping is to a narrower term</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="formalism">
+    <rdfs:label xml:lang="en">formalism</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#DV_PARSABLE"/>
+    <rdfs:label xml:lang="es">formato</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="institution_specified">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_TIME_SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="minutes">
+    <rdfs:label xml:lang="en">minutes</rdfs:label>
+    <rdfs:label xml:lang="es">minutos</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:domain rdf:resource="#DV_DURATION"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hour">
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:first>3</rdf:first>
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:first>5</rdf:first>
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:first>11</rdf:first>
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:first>12</rdf:first>
+                                <rdf:rest rdf:parseType="Resource">
+                                  <rdf:first>13</rdf:first>
+                                  <rdf:rest rdf:parseType="Resource">
+                                    <rdf:first>14</rdf:first>
+                                    <rdf:rest rdf:parseType="Resource">
+                                      <rdf:rest rdf:parseType="Resource">
+                                        <rdf:first>16</rdf:first>
+                                        <rdf:rest rdf:parseType="Resource">
+                                          <rdf:first>17</rdf:first>
+                                          <rdf:rest rdf:parseType="Resource">
+                                            <rdf:rest rdf:parseType="Resource">
+                                              <rdf:first>19</rdf:first>
+                                              <rdf:rest rdf:parseType="Resource">
+                                                <rdf:first>20</rdf:first>
+                                                <rdf:rest rdf:parseType="Resource">
+                                                  <rdf:first>21</rdf:first>
+                                                  <rdf:rest rdf:parseType="Resource">
+                                                    <rdf:first
+                                                    >22</rdf:first>
+                                                    <rdf:rest rdf:parseType="Resource">
+                                                      <rdf:first
+                                                      >23</rdf:first>
+                                                      <rdf:rest rdf:parseType="Resource">
+                                                        <rdf:first
+                                                        >24</rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                      </rdf:rest>
+                                                    </rdf:rest>
+                                                  </rdf:rest>
+                                                </rdf:rest>
+                                              </rdf:rest>
+                                            </rdf:rest>
+                                            <rdf:first>18</rdf:first>
+                                          </rdf:rest>
+                                        </rdf:rest>
+                                      </rdf:rest>
+                                      <rdf:first>15</rdf:first>
+                                    </rdf:rest>
+                                  </rdf:rest>
+                                </rdf:rest>
+                              </rdf:rest>
+                            </rdf:rest>
+                            <rdf:first>10</rdf:first>
+                          </rdf:rest>
+                          <rdf:first>9</rdf:first>
+                        </rdf:rest>
+                        <rdf:first>8</rdf:first>
+                      </rdf:rest>
+                      <rdf:first>7</rdf:first>
+                    </rdf:rest>
+                    <rdf:first>6</rdf:first>
+                  </rdf:rest>
+                </rdf:rest>
+                <rdf:first>4</rdf:first>
+              </rdf:rest>
+            </rdf:rest>
+            <rdf:first>2</rdf:first>
+          </rdf:rest>
+          <rdf:first>1</rdf:first>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+    <rdfs:label xml:lang="en">hour</rdfs:label>
+    <rdfs:label xml:lang="es">hora</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_DATE_TIME"/>
+          <owl:Class rdf:about="#DV_TIME"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="units">
+    <rdfs:label xml:lang="en">units</rdfs:label>
+    <rdfs:comment>stringified units, expressed in UCUM unit syntax, e.g. dg/m2, km/h...</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="es">unidades</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DV_MEASURABLE"/>
+          <owl:Class rdf:about="#DV_QUANTITY"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="accuracy">
+    <rdfs:domain rdf:resource="#DV_QUANTIFIED"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="formatting">
+    <rdfs:domain rdf:resource="#DV_TEXT"/>
+    <rdfs:comment>A format string of the form "name:value; name:value..."Values taken from W3C CSS2 properties lists</rdfs:comment>
+    <rdfs:label xml:lang="es">cadena formateada</rdfs:label>
+    <rdfs:label xml:lang="en">formatting</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 1.2 beta, Build 147)  http://protege.stanford.edu -->
