@@ -9,7 +9,7 @@ This is the class responsible for processing the ontology and calculating all th
 class OntologyProcessing:
 
     def __init__(self, ontology, method):
-        self.forgetOntology = ontology
+        self.forgetOntology = 'datasets/' + ontology
         self.signature = ''
         self.method = method
         self.satisfiable = 0
