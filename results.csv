@@ -1,0 +1,19 @@
+Ontology Name,Restrictions,# Concepts forgotten,method
+einsteins_riddle.owl,88,0,1
+einsteins_riddle.owl,88,0,2
+einsteins_riddle.owl,88,0,3
+HarryPotter_book.owl,10,6,1
+HarryPotter_book.owl,10,6,2
+HarryPotter_book.owl,10,6,3
+LibraryOntology.owl,24,7,1
+LibraryOntology.owl,24,7,2
+LibraryOntology.owl,24,7,3
+OntoWAWO+.owl,0,221,1
+OntoWAWO+.owl,0,221,2
+OntoWAWO+.owl,0,221,3
+pizza.owl,188,95,1
+pizza.owl,188,95,2
+pizza.owl,188,95,3
+pizza_super_simple,37,7,1
+pizza_super_simple,37,7,2
+pizza_super_simple,37,7,3

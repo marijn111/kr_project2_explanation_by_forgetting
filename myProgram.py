@@ -11,14 +11,14 @@ inputSubclassStatements = "subclasstest.nt"
 
 # Choose the ontology to which you want to apply forgetting. This can be the inputOntology, but in practise
 # should be a smaller ontology, e.g. created as a justification for a subsumption
-forgetOntology = "datasets/pizza_super_simple.owl"
+forgetOntology = "datasets/pizza.owl"
 
 # Decide on a method for the forgetter (check the papers of LETHE to understand the different options).
 # The default is 1, I believe.
 # 1 - ALCHTBoxForgetter
 # 2 - SHQTBoxForgetter
 # 3 - ALCOntologyForgetter
-method = "2" #
+method = "1" #
 
 # Choose the symbols which you want to forget.
 signature = "datasets/signature.txt"
@@ -31,7 +31,7 @@ signature = "datasets/signature.txt"
 # 2. SAVE ALL SUBCLASSES (inputOntology):
 # save all subClass statements (explicit and inferred) in the inputOntology to file datasets/subClasses.nt
 # --> uncomment the following line to run this function
-os.system('java -jar kr_functions.jar ' + 'saveAllSubClasses' + " " + inputOntology)
+# os.system('java -jar kr_functions.jar ' + 'saveAllSubClasses' + " " + forgetOntology)
 
 # 3. PRINT ALL EXPLANATIONS (inputOntology, inputSubclassStatements):
 # print explanations for each subClass statement in the inputSubclassStatements
@@ -46,5 +46,5 @@ os.system('java -jar kr_functions.jar ' + 'saveAllSubClasses' + " " + inputOntol
 
 # For running LETHE forget command:
 # --> uncomment the following line to run this function
-# os.system('java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + forgetOntology + ' --method ' + method + ' --signature ' + signature)
+os.system('java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + forgetOntology + ' --method ' + method + ' --signature ' + signature)
 

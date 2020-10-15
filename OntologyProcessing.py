@@ -1,5 +1,6 @@
 import os
 import time
+import multiprocessing
 
 """
 This is the class responsible for processing the ontology and calculating all the things
@@ -11,8 +12,8 @@ class OntologyProcessing:
     def __init__(self, ontology, method):
         self.forgetOntology = 'datasets/' + ontology
         self.signature = ''
-        self.method = method
-        self.satisfiable = 0
+        self.method = str(method)
+        self.satisfiable = 1
         self.loop_count = 0
         self.amount_of_restrictions = 0
         self.amount_of_forgotten_items = 0
@@ -25,12 +26,18 @@ class OntologyProcessing:
             if '<owl:Restriction>' in line:
                 self.amount_of_restrictions += 1
 
+        return self.amount_of_restrictions
+
     def format_uri(self, axiom):
         axiom = axiom.strip(' \n<>/')
         axiom = axiom.split()[1]
         uri = axiom.split('=')[1]
         uri = uri.strip('"')
         return uri
+
+    def forgetting_process(self):
+        os.system(
+            'java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + self.forgetOntology + ' --method ' + self.method + ' --signature ' + self.signature)
 
     def process_ontology(self):
 
@@ -45,6 +52,8 @@ class OntologyProcessing:
             f = open('datasets/subClasses.nt')
 
             for line in f:
+                if 'ObjectIntersectionOf' in line:
+                    continue
                 line = line.split()
                 subclass = line[0].strip('<>')
                 object_property = line[1].strip('<>')
@@ -68,13 +77,25 @@ class OntologyProcessing:
 
             fout.close()
 
+            self.signature = 'datasets/signature.txt'
+
             time.sleep(5)
 
             # Start forgetting stuff
 
             print('[INFO] Starting with Forgetting...')
-            os.system(
-                'java -cp lethe-standalone.jar uk.ac.man.cs.lethe.internal.application.ForgettingConsoleApplication --owlFile ' + self.forgetOntology + ' --method ' + self.method + ' --signature ' + self.signature)
+
+            p = multiprocessing.Process(target=self.forgetting_process())
+            p.start()
+            p.join(30)
+
+            if p.is_alive():
+                print('[INFO] Process is still running, so kill it')
+
+                p.terminate()
+                p.join()
+                self.amount_of_forgotten_items = len(self.classes)
+                break
 
             time.sleep(5)
 
@@ -108,10 +129,15 @@ class OntologyProcessing:
 
             else:
                 for axiom in axioms:
-                    self.classes.append(self.format_uri(axiom))
+                    if axiom not in self.classes and 'Nothing' not in axiom:
+                        self.classes.append(self.format_uri(axiom))
 
             self.loop_count += 1
             print('[INFO] Current loop count: ' + str(self.loop_count))
+
+            if self.loop_count == 2:
+                self.amount_of_forgotten_items = len(self.classes)
+                break
 
         print('[INFO] Amount of restrictions: {}'.format(self.amount_of_restrictions))
         print('[INFO] Amount of forgotten items: {}'.format(self.amount_of_forgotten_items))
